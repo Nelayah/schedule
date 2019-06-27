@@ -1,0 +1,167 @@
+@borderColor: rgb(230, 229, 230);
+@cellActiveColor: rgb(42, 172, 246);
+@textGrayColor: rgb(203, 202, 200);
+@disabledColor: rgb(245, 245, 245);
+
+@prefixCls: scheduler;
+@prefixClsCell: scheduler-cell;
+
+.@{prefixCls} {
+	overflow: hidden;
+
+	user-select: none;
+
+	border-right: 1px solid @borderColor;
+	// border-left: 1px solid @borderColor;
+	background-color: white;
+	.@{prefixClsCell} {
+		padding: 0 7px;
+
+		border-top: 1px solid @borderColor;
+    border-left: 1px solid @borderColor;
+    &-data {
+			transition: all .2s;
+
+			background-color: transparent;
+			&:hover {
+				background-color: @cellActiveColor;
+			}
+		}
+    &-active {
+      border-color: transparent;
+      background-color: @cellActiveColor;
+    }
+  }
+	&-forbidden {
+		background: @disabledColor;
+	}
+	// 表格表头
+	&-header {
+		position: relative;
+		z-index: 20;
+
+		overflow: hidden;
+
+		box-shadow: 0 2px #eee;
+
+		&-cell {
+			float: left;
+
+			background-color: white;
+		}
+		.@{prefixClsCell} {
+			border-bottom: 1px solid @borderColor;
+    }
+		.@{prefixCls}-timeline-title {
+			position: relative;
+
+			text-align: right;
+
+			color: @textGrayColor;
+			border-left: 0;
+		}
+		&-col {
+			float: left;
+			overflow: hidden;
+
+			&-items {
+				overflow-x: scroll;
+				overflow-y: hidden;
+
+				box-sizing: content-box;
+				padding-bottom: 17px;
+			}
+			.@{prefixClsCell} {
+				&:nth-of-type(1) {
+					border-left: 0;
+				}
+			}
+		}
+	}
+	// 表格主体
+	&-body {
+		position: relative;
+
+		overflow-y: hidden;
+
+		border-bottom: 1px solid @borderColor;
+
+		.@{prefixClsCell} {
+			&:nth-of-type(1) {
+				border-top: 0;
+			}
+		}
+  }
+  // 表格主体列项
+  &-col {
+    position: relative;
+
+    float: left;
+    &-background {
+      position: absolute;
+      z-index: 8;
+      top: 0;
+      left: 0;
+    }
+    .@{prefixCls}-col-overlap {
+      position: relative;
+      z-index: 9;
+      .@{prefixClsCell} {
+        border: 0;
+      }
+    }
+    &-active {
+      .@{prefixCls}-col-overlap {
+        z-index: 15;
+      }
+    }
+    &-fixed {
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      overflow: hidden;
+
+      width: 100%;
+      height: 100%;
+      &-container {
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        box-sizing: content-box;
+        padding-right: 17px;
+
+        color: @textGrayColor;
+      }
+
+      .@{prefixClsCell} {
+        box-sizing: border-box;
+
+        text-align: right;
+
+        border-top: 0;
+      }
+    }
+  }
+  &:nth-of-type(1) {
+    .@{prefixClsCell} {
+      border-left: 0;
+    }
+  }
+  // 显示已选择的数据块样式
+  &-arrangement {
+    line-height: 20px;
+
+    z-index: 10;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+    padding: 0;
+
+    color: rgb(43, 117, 173);
+    border-left: 2px solid rgb(42, 172, 246) !important;
+    background-color: rgba(210, 238, 253, .8);
+  }
+}
