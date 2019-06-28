@@ -33,7 +33,7 @@ export interface IAppState {
 export default class extends React.Component<IAppProps, IAppState> {
   static displayName = 'Demo';
   state = {
-    columns: [{key: 'archer', title: 'Archer'}],
+    columns: [{key: 'saber', title: 'Saber'}],
     inputValue: undefined,
     dataSource: [],
     selectedIds: [],
@@ -138,7 +138,6 @@ export default class extends React.Component<IAppProps, IAppState> {
     );
   }
   public render() {
-    console.log('demo', this.dataSource, this.state.selectedIds);
     return (
       <div style={{padding: 20}}>
         <div>ScrollTop: {this.state.scrollTop}px ScrollLeft: {this.state.scrollLeft}px</div>
