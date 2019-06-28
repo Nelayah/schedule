@@ -1,5 +1,6 @@
 __tests__
 node_modules
+lib/demo
 src
 .browserlistrc
 .gitignore
@@ -13,6 +14,8 @@ tsconfig.test.json
 tsconfig.json
 tslint.json
 CHANGELOG.md
+.storybook
+stories
 webpack.config.js
 
 

@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import TimeProcessor from './lib/TimeProcessor';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classnames from 'classnames';
-import Columns from './components/columns';
+import Columns, { IAppProps } from './components/columns';
 import Provider from './components/provider';
 import {
   SchedulerProps,
@@ -14,13 +14,14 @@ export const prefixCls = 'time-scheduler';
 export const cellCls = `${prefixCls}-cell`;
 export const cellColumnsCls = `${prefixCls}-col`;
 export const cellHeaderCls = classnames(cellCls, `${prefixCls}-header-cell`);
-export const TIMELINE_COL_WIDTH = 80;
 
 export default class extends React.Component<SchedulerProps, SchedulerState> {
+  static displayName = 'Time-scheduler';
   static defaultProps: SchedulerProps = {
     startAt: '00:00',
     endAt: '23:50',
     timelineInterval: 30,
+    timelineWidth: 80,
     timelineFormat: 'HH:mm',
     columns: [],
     dataSource: [],
@@ -41,7 +42,7 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
   maxWidth: number = 0;
   maxHeight: number = 0;
   scrollMarker = false;
-  constructor(props) {
+  constructor(props: IAppProps) {
     super(props);
     this.timeProcessor = TimeProcessor.of(props.startAt, props.endAt);
     const serialization = this.timeProcessor.serialize(props.timelineInterval);
@@ -49,11 +50,11 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
       title: v.format(props.timelineFormat),
       key: v.valueOf()
     }));
-    this.width = props.cellWidth * props.columns.length + TIMELINE_COL_WIDTH;
+    this.width = props.cellWidth * props.columns.length + props.timelineWidth;
     this.height = rows.length * props.cellHeight;
     this.maxHeight = Math.min(props.maxHeight, this.height);
     this.maxWidth = props.autoSize ? props.maxWidth : Math.min(props.maxWidth, this.width);
-    this.cellWidth = props.autoSize ? Math.max(Math.floor((props.maxWidth - TIMELINE_COL_WIDTH) / props.columns.length), props.cellWidth) : props.cellWidth;
+    this.cellWidth = props.autoSize ? Math.max(Math.floor((props.maxWidth - props.timelineWidth) / props.columns.length), props.cellWidth) : props.cellWidth;
     this.state = {
       isScrollLeft: false,
       isScrollTop: false,
@@ -65,10 +66,10 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
     // @ts-ignore
     const isDiff: any = R.complement(R.eqProps(R.__, nextProps, this.props));
     // 监听 columns、maxWidth 和 cellWidth 变化
-    if ( nextProps.columns.length !== this.props.columns.length || isDiff('cellWidth') || isDiff('maxWidth') || isDiff('autoSize')) {
-      this.width = nextProps.cellWidth * nextProps.columns.length + TIMELINE_COL_WIDTH;
+    if ( nextProps.columns.length !== this.props.columns.length || isDiff('cellWidth') || isDiff('maxWidth') || isDiff('autoSize') || isDiff('timelineWidth')) {
+      this.width = nextProps.cellWidth * nextProps.columns.length + nextProps.timelineWidth;
       this.maxWidth = nextProps.autoSize ? nextProps.maxWidth : Math.min(nextProps.maxWidth, this.width);
-      this.cellWidth = nextProps.autoSize ? Math.max(Math.floor((nextProps.maxWidth - TIMELINE_COL_WIDTH) / nextProps.columns.length), nextProps.cellWidth) : nextProps.cellWidth;
+      this.cellWidth = nextProps.autoSize ? Math.max(Math.floor((nextProps.maxWidth - nextProps.timelineWidth) / nextProps.columns.length), nextProps.cellWidth) : nextProps.cellWidth;
     }
     // 监听 startAt、endAt、timelineInterval 和 timelineFormat 变化
     if (isDiff('startAt') || isDiff('endAt') || isDiff('timelineInterval') || isDiff('timelineFormat')) {
@@ -88,8 +89,11 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
   shouldComponentUpdate(nextProps: SchedulerProps, nextState: SchedulerState) {
     // @ts-ignore
     const isDiffState: any = R.complement(R.eqProps(R.__, nextState, this.state));
+    const isDiffPropsJSON: any = key => JSON.stringify(nextProps[key]) !== JSON.stringify(this.props[key]);
+    const getColumnsKeyString = obj => JSON.stringify(R.pluck('key')(obj.columns));
     const shouldUpdateState = R.keys(this.state).reduce((prev, key) => prev || isDiffState(key), false);
-    return JSON.stringify(nextProps.dataSource) !== JSON.stringify(this.props.dataSource) || shouldUpdateState;
+
+    return isDiffPropsJSON('dataSource') || getColumnsKeyString(nextProps) !== getColumnsKeyString(this.props) || shouldUpdateState;
   }
   // 数据行列滚动
   handleBodyScroll = () => {
@@ -116,7 +120,8 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
       className,
       dataSource,
       cellHeight,
-      autoSize
+      autoSize,
+      timelineWidth
     } = this.props;
     const {rows} = this.state;
     const tableWidth = autoSize ? Math.max(this.maxWidth, this.width) : this.width;
@@ -130,21 +135,21 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
           <div className={`${prefixCls}-header`} style={{width: tableWidth}}>
             <div
               className={classnames(cellHeaderCls, `${prefixCls}-timeline-title`)}
-              style={{width: TIMELINE_COL_WIDTH, height: cellHeight, lineHeight: `${cellHeight}px`}}
+              style={{width: timelineWidth, height: cellHeight, lineHeight: `${cellHeight}px`}}
             >
               {timelineTitle}
             </div>
             <div
               className={`${prefixCls}-header-col`}
-              style={{width: this.maxWidth - TIMELINE_COL_WIDTH, height: cellHeight}}
+              style={{width: this.maxWidth - timelineWidth, height: cellHeight}}
             >
               <div
                 ref={this.header}
                 className={`${prefixCls}-header-col-items`}
-                style={{width: this.maxWidth - TIMELINE_COL_WIDTH}}
+                style={{width: this.maxWidth - timelineWidth}}
                 onScroll={this.handleFixedScroll}
               >
-                <div style={{width: (tableWidth) - TIMELINE_COL_WIDTH}}>
+                <div style={{width: (tableWidth) - timelineWidth}}>
                   {columns.map(v => {
                     return (
                       <div
@@ -170,19 +175,19 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
                 style={{height: this.maxHeight, width: this.maxWidth + 20}}
                 onScroll={this.handleFixedScroll}
               >
-                <div className={cellCls} style={{width: TIMELINE_COL_WIDTH, height: cellHeight / 2}}></div>
+                <div className={cellCls} style={{width: timelineWidth, height: cellHeight / 2}}></div>
                 {rows.map(v => {
                   return (
                     <div
                       key={v.key}
                       className={cellCls}
-                      style={{width: TIMELINE_COL_WIDTH, height: cellHeight, lineHeight: `${cellHeight}px`}}
+                      style={{width: timelineWidth, height: cellHeight, lineHeight: `${cellHeight}px`}}
                     >
                       {v.title}
                     </div>
                   );
                 })}
-                <div className={cellCls} style={{width: TIMELINE_COL_WIDTH, height: cellHeight / 2}}></div>
+                <div className={cellCls} style={{width: timelineWidth, height: cellHeight / 2}}></div>
               </div>
             </div>
             <Scrollbars
@@ -190,13 +195,13 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
               onScroll={this.handleBodyScroll}
               autoHide
               style={{
-                marginLeft: TIMELINE_COL_WIDTH,
+                marginLeft: timelineWidth,
                 float: 'left',
-                width: this.maxWidth - TIMELINE_COL_WIDTH,
+                width: this.maxWidth - timelineWidth,
                 height: this.maxHeight
               }}
             >
-              <div style={{width: tableWidth - TIMELINE_COL_WIDTH}}>
+              <div style={{width: tableWidth - timelineWidth}}>
                 {columns.map(v => {
                   return (
                     <Columns

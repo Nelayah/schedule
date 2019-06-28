@@ -51,8 +51,10 @@ export default class extends React.Component<IAppProps, IAppState> {
   shouldComponentUpdate(nextProps: IAppProps, nextState: IAppState) {
     // @ts-ignore
     const isDiffState: any = R.complement(R.eqProps(R.__, nextState, this.state));
+    // @ts-ignore
+    const isDiffProps: any = R.complement(R.eqProps(R.__, nextProps, this.props));
     const shouldUpdateState = R.keys(this.state).reduce((prev, key) => prev || isDiffState(key), false);
-    return JSON.stringify(nextProps.dataSource) !== JSON.stringify(this.props.dataSource) || shouldUpdateState;
+    return JSON.stringify(nextProps.dataSource) !== JSON.stringify(this.props.dataSource) || isDiffProps('cellWidth') || shouldUpdateState;
   }
   // 过滤不在显示时区的数据
   get selectedAreas() {

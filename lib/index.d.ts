@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { IAppProps } from './components/columns';
 import { SchedulerProps, SchedulerState } from './externals';
 export declare const prefixCls = "time-scheduler";
 export declare const cellCls: string;
 export declare const cellColumnsCls: string;
 export declare const cellHeaderCls: any;
-export declare const TIMELINE_COL_WIDTH = 80;
 export default class extends React.Component<SchedulerProps, SchedulerState> {
+    static displayName: string;
     static defaultProps: SchedulerProps;
     header: any;
     row: any;
@@ -17,7 +18,7 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
     maxWidth: number;
     maxHeight: number;
     scrollMarker: boolean;
-    constructor(props: any);
+    constructor(props: IAppProps);
     componentWillReceiveProps(nextProps: SchedulerProps): void;
     shouldComponentUpdate(nextProps: SchedulerProps, nextState: SchedulerState): any;
     handleBodyScroll: () => boolean;

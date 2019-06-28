@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --config .jest.js",
     "dist": "NODE_ENV=production webpack --config ./webpack.config.js --progress",
-    "version": "standard-version -- --release-as"
+    "version": "standard-version -- --release-as",
+    "demo": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,10 @@
     "@babel/preset-env": "latest",
     "@babel/preset-react": "latest",
     "@babel/runtime": "latest",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
     "@types/jest": "latest",
     "@types/node": "latest",
     "@types/ramda": "^0.26.10",
@@ -35,6 +41,7 @@
     "@types/react-dom": "latest",
     "@types/recompose": "^0.30.6",
     "@types/webpack-env": "latest",
+    "antd": "^3.19.8",
     "autoprefixer": "^9.6.0",
     "babel-loader": "latest",
     "clean-webpack-plugin": "latest",
