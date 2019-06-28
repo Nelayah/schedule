@@ -1,5 +1,4 @@
 import * as R from 'ramda';
-import * as md5 from 'blueimp-md5';
 import TimeProcessor from './TimeProcessor';
 
 export const defaultArray: any = R.defaultTo([]);
@@ -10,17 +9,20 @@ export const MAX_REF_NUMBER = 2000;
 export const countOverlaps = times => {
   const len = times.length;
   let tracks = 0;
-  R.range(0, len).forEach(i => {
-    R.range(i + 1, len).forEach(j => {
-      if (times[i]._endTime <= times[j]._startTime) return;
-      if (times[j]._track === times[i]._track) {
-        times[j]._track++;
-        tracks = Math.max(tracks, times[j]._track);
-      }
-      times[j]._overlay.push({_track: times[i]._track});
-      times[i]._overlay.push({_track: times[j]._track});
-    });
-  });
+  for (let i = 0; i < len; i++) {
+    for (let j = i + 1; j < len; j++) {
+      if (times[i]._endTime > times[j]._startTime) {
+        times[j]._overlayIndex.push(i);
+        times[i]._overlayIndex.push(j);
+        times[j]._disabledTrack.push(times[i]._track);
+        while (times[j]._disabledTrack.includes(times[j]._track)) {
+          times[j]._track++;
+          tracks = Math.max(tracks, times[j]._track);
+        }
+      } else break;
+    }
+  }
+  for (let i = 0; i < len; i++) times[i]._overlay = times[i]._overlayIndex.map(k => ({_track: times[k]._track}));
   return ({
     times,
     tracks
@@ -34,7 +36,9 @@ export const preProcessing: any = R.compose(
     return R.compose(
       R.mergeDeepLeft({
         _track: 0,
+        _disabledTrack: [],
         _overlay: [],
+        _overlayIndex: [],
         _startTime: TimeProcessor.toTimestamp(v.rowStartKey),
         _endTime: TimeProcessor.toTimestamp(v.rowEndKey)
       })
@@ -49,20 +53,3 @@ export const findTheMinimumGreater = v => R.compose(
   R.pluck('_track'),
   R.prop('_overlay')
 )(v);
-// 计算缓存 key 值
-export const calculateCache: any = R.compose(
-  md5,
-  JSON.stringify,
-  R.map(R.pick(['colKey', 'rowEndKey', 'rowStartKey'])),
-  R.sort((x: any, y: any) => TimeProcessor.toTimestamp(x.rowStartKey) - TimeProcessor.toTimestamp(y.rowStartKey)),
-  defaultArray
-);
-// 用缓存更新现有值
-export const updateCacheFunc: any = cache => data => {
-  return cache.map((v, i) => {
-    return {
-      ...R.pick(['_startTime', '_endTime', '_proportion', '_track', '_overlay', '_minimum'])(v),
-      ...data[i]
-    };
-  });
-};

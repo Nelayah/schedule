@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SchedulerProps, SchedulerState } from './externals';
-export declare const prefixCls = "scheduler";
+export declare const prefixCls = "time-scheduler";
 export declare const cellCls: string;
 export declare const cellColumnsCls: string;
 export declare const cellHeaderCls: any;

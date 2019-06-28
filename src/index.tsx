@@ -10,7 +10,7 @@ import {
   SchedulerState
 } from './externals';
 
-export const prefixCls = 'scheduler';
+export const prefixCls = 'time-scheduler';
 export const cellCls = `${prefixCls}-cell`;
 export const cellColumnsCls = `${prefixCls}-col`;
 export const cellHeaderCls = classnames(cellCls, `${prefixCls}-header-cell`);

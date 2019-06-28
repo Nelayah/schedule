@@ -37,6 +37,7 @@ export interface DataSourceType {
     rowStartKey: string;
     rowEndKey: string;
     content: string;
+    dataKey?: string;
     [propertyName: string]: any;
 }
 export interface SchedulerState {

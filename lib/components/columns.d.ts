@@ -23,7 +23,6 @@ export default class extends React.Component<IAppProps, IAppState> {
         selectedData: any[];
     };
     tracks: number;
-    calculateCache: {};
     componentDidMount(): void;
     componentWillReceiveProps(nextProps: IAppProps): void;
     shouldComponentUpdate(nextProps: IAppProps, nextState: IAppState): any;

@@ -40,7 +40,6 @@ export default class extends React.Component<IAppProps, IAppState> {
     selectedData: []
   };
   tracks = 1;
-  calculateCache = {};
   componentDidMount() {
     this.handleCalculateDisplay(this.props.dataSource);
   }
@@ -68,14 +67,8 @@ export default class extends React.Component<IAppProps, IAppState> {
   // 计算时间段交叉重叠的情况
   handleCalculateDisplay = dataSource => {
     if (dataSource.length === 0) return this.setState({selectedData: []});
-    const cacheKey = utils.calculateCache(dataSource);
-    if (cacheKey in this.calculateCache) {
-      const update = utils.updateCacheFunc(this.calculateCache[cacheKey]);
-      return this.setState({selectedData: update(dataSource)});
-    }
 
     const data = utils.preProcessing(dataSource);
-
     this.tracks = data.tracks + 1;
     data.times.forEach(v => {
       const minimum: any = utils.findTheMinimumGreater(v);
@@ -83,7 +76,6 @@ export default class extends React.Component<IAppProps, IAppState> {
       if (minimum === utils.MAX_REF_NUMBER) return v._proportion = this.tracks - v._track;
       v._proportion = minimum - v._track;
     });
-    this.calculateCache[cacheKey] = data.times;
     this.setState({selectedData: data.times});
   }
   // 记录选择起点
@@ -199,9 +191,10 @@ export default class extends React.Component<IAppProps, IAppState> {
         )}
         {/* 显示已安排的数据 */}
         {this.selectedAreas.map(v => {
+          const getDefaultKey = R.defaultTo(`${v.rowStartKey}_${v.rowEndKey}`);
           return (
             <Blocks
-              key={`${v.rowStartKey}_${v.rowEndKey}`}
+              key={getDefaultKey(v.dataKey)}
               data={v}
               top={TimeProcessor.calculateTimeLen(v.rowStartKey, rows[0].key, timelineInterval, cellHeight) + cellHeight + 1}
               height={TimeProcessor.calculateTimeLen(v.rowEndKey, v.rowStartKey, timelineInterval, cellHeight) - 2}

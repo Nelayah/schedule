@@ -1,5 +1,5 @@
 {
-  "name": "scheduler",
+  "name": "time-scheduler",
   "version": "1.0.0",
   "description": "react scheduler",
   "main": "lib/index.js",
@@ -67,7 +67,6 @@
     }
   },
   "dependencies": {
-    "blueimp-md5": "^2.10.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
