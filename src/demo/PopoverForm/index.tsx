@@ -140,7 +140,7 @@ export default class extends React.Component<IAppProps, IAppState> {
           <FormItem label="endTime" style={{width: 128}}>
             {form.getFieldDecorator('endTime', {
               rules: [
-                {validator: (rule, value: moment.Moment, cb: any) => {
+                {validator: (_, value: moment.Moment, cb: any) => {
                   cb(compareMoment(value)(form.getFieldValue('startTime')));
                 }}
               ],
