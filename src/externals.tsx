@@ -7,7 +7,7 @@ export interface SchedulerProps {
   timelineWidth?: number;
   timelineInterval?: number;
   timelineFormat?: string;
-  columns?: IItemsType[];
+  columns?: IColumnProps[];
   cellWidth?: number;
   cellHeight?: number;
   maxWidth?: number;
@@ -16,37 +16,31 @@ export interface SchedulerProps {
   autoSize?: boolean;
   onSelect?: (params: ISelectFuncProps) => void;
   onScroll?: (scrollTop: number, scrollLeft: number) => void;
-  selectedDataFaCC?: (selectedData: any) => React.ReactNode;
+  selectedDataFaCC?: (selectedData: IDataSourceProps) => React.ReactNode;
 }
 
 export interface SchedulerState {
   isScrollLeft: boolean;
   isScrollTop: boolean;
-  rows?: IItemsType[];
-}
-
-export interface ISelectFuncProps {
-  rowStart: string;
-  rowEnd: string;
-  col: IColumnProps;
+  rows?: IColumnProps[];
 }
 
 export interface IColumnProps {
   key: string;
-  title: string;
-}
-
-export interface IItemsType {
-  key: string;
-  disabled?: boolean;
   title: string | React.ReactNode;
+  [propertyName: string]: any;
 }
 
 export interface IDataSourceProps {
   colKey: string;
   rowStartKey: string;
   rowEndKey: string;
-  content?: string;
   dataKey?: string;
   [propertyName: string]: any;
+}
+
+export interface ISelectFuncProps {
+  rowStart: string;
+  rowEnd: string;
+  col: IColumnProps;
 }

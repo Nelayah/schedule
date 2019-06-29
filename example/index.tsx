@@ -33,7 +33,7 @@ export interface IAppState {
 export default class extends React.Component<IAppProps, IAppState> {
   static displayName = 'Demo';
   state = {
-    columns: [{key: 'saber', title: 'Saber'}],
+    columns: [{key: 'family', title: 'Family Scheduler'}],
     inputValue: undefined,
     dataSource: [],
     selectedIds: [],

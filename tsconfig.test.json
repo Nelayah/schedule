@@ -1,7 +1,19 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "jsx": "react",
-    "module": "commonjs"
+    "module": "commonjs",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "target": "es6",
+    "declarationDir": "./lib",
+    "outDir": "./jsx",
+    "lib": [
+      "dom",
+      "es7"
+    ]
   }
 }

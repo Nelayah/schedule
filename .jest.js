@@ -1,5 +1,9 @@
 module.exports = {
   verbose: true,
+  setupFiles: [
+    './setup.js',
+  ],
+  setupFilesAfterEnv: ['./node_modules/jest-enzyme/lib/index.js'],
   transform: {
     "^.+\\.tsx?$": "ts-jest"
   },
@@ -17,7 +21,7 @@ module.exports = {
   ],
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.json',
+      tsConfig: './tsconfig.test.json',
     }
   }
 };

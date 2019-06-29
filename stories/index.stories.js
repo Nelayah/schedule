@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Scheduler from '../lib';
 import '../lib/style/index.css';
-import Demo from '../lib/demo';
+import Example from '../lib/example';
 
 storiesOf('Time Scheduler', module)
   .add('Original Component', () => (
@@ -24,5 +24,5 @@ storiesOf('Time Scheduler', module)
     </div>
   ))
   .add('With Ant Design Components', () => (
-    <Demo />
+    <Example />
   ));
