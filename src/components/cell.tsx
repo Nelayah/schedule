@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import * as React from 'react';
-import * as moment from 'moment';
+import moment from '../lib/moment-es6';
 import connect from '../lib/connect';
 import {SchedulerProps} from '../externals';
 

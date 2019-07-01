@@ -1,16 +1,12 @@
 import * as R from 'ramda';
 import * as React from 'react';
-import * as moment from 'moment';
+import moment from '../lib/moment-es6';
 import renderIf from 'render-if';
 import Scheduler from '../';
 import PopoverForm from './PopoverForm';
 import '../style/index.css';
 import 'antd/lib/input/style/css';
-import {
-  IDataSourceProps,
-  IColumnProps,
-  ISelectFuncProps
-} from '../externals';
+import {IDataSourceProps, IColumnProps, ISelectFuncProps} from '../externals';
 import {
   Icon,
   Input
@@ -75,11 +71,10 @@ export default class extends React.Component<IAppProps, IAppState> {
       })
     }));
   }
-  handleScroll = (scrollTop: number, scrollLeft: number) => {
+  handleScroll = () => {
+    if (this.state.selectedIds.length === 0) return;
     this.setState({
-      selectedIds: [],
-      scrollTop,
-      scrollLeft
+      selectedIds: []
     });
   }
   handleSelectedDataDelete = (ev: React.MouseEvent) => {
@@ -139,8 +134,7 @@ export default class extends React.Component<IAppProps, IAppState> {
   }
   public render() {
     return (
-      <div style={{padding: 20}}>
-        <div>ScrollTop: {this.state.scrollTop}px ScrollLeft: {this.state.scrollLeft}px</div>
+      <div style={{padding: 20, width: '100%'}}>
         <div style={{lineHeight: '32px', width: 400, marginBottom: 10}}>
           Add a user:{' '}
           <Search
@@ -158,6 +152,7 @@ export default class extends React.Component<IAppProps, IAppState> {
           cellWidth={200}
           maxWidth={850}
           maxHeight={600}
+          autoSize={true}
           // @ts-ignore
           dataSource={this.dataSource}
           columns={this.state.columns}

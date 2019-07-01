@@ -1,7 +1,6 @@
 __tests__
 node_modules
 lib/example
-example
 src
 .browserlistrc
 .gitignore
@@ -18,6 +17,3 @@ CHANGELOG.md
 .storybook
 stories
 webpack.config.js
-
-
-

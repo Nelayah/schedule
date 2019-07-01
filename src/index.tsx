@@ -101,7 +101,7 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
     if (this.scrollMarker) return this.scrollMarker = false;
     this.row.current.scrollTop = this.cell.current.view.scrollTop;
     this.header.current.scrollLeft = this.cell.current.view.scrollLeft;
-    onScroll(this.cell.current.view.scrollTop, this.cell.current.view.scrollLeft);
+    onScroll && onScroll(this.cell.current.view.scrollTop, this.cell.current.view.scrollLeft);
     this.scrollMarker = true;
   }
   // 固定行列滚动
@@ -110,7 +110,7 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
     if (this.scrollMarker) return this.scrollMarker = false;
     this.cell.current.view.scrollTop = this.row.current.scrollTop;
     this.cell.current.view.scrollLeft = this.header.current.scrollLeft;
-    onScroll(this.row.current.scrollTop, this.header.current.scrollLeft);
+    onScroll && onScroll(this.row.current.scrollTop, this.header.current.scrollLeft);
     this.scrollMarker = true;
   }
   public render() {

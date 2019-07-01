@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import * as moment from 'moment';
+import moment from '../lib/moment-es6';
 import * as utils from '../lib/utils';
 import renderIf from 'render-if';
 import classnames from 'classnames';
@@ -176,7 +176,7 @@ export default class extends React.Component<IAppProps, IAppState> {
         {showOverlay(
           <div className={`${prefixCls}-col-overlap`}>
             <Cell className={cellCls} />
-            {rows.map((v, i) => {
+            {rows.slice(0, rows.length - 1).map((v, i) => {
               return (
                 <Cell
                   key={v.key}
@@ -189,6 +189,7 @@ export default class extends React.Component<IAppProps, IAppState> {
                   onMouseOver={this.handleEndIndex}
               />);
             })}
+            <Cell className={cellCls} />
           </div>
         )}
         {/* 显示已安排的数据 */}

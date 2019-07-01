@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import * as React from 'react';
-import * as moment from 'moment';
+import moment from '../../lib/moment-es6';
 import {WrappedFormUtils} from 'antd/lib/form/Form';
 import 'antd/lib/popover/style/css';
 import 'antd/lib/form/style/css';
@@ -119,7 +119,7 @@ export default class extends React.Component<IAppProps, IAppState> {
       initialValue
     } = this.props;
     return (
-      <Form style={{width: 300}} onSubmit={this.handleConfirm}>
+      <Form style={{width: 260}} onSubmit={this.handleConfirm}>
         <Row type="flex" justify="space-between">
           <FormItem label="startTime" style={{width: 128}}>
             {form.getFieldDecorator('startTime', {
@@ -140,7 +140,7 @@ export default class extends React.Component<IAppProps, IAppState> {
           <FormItem label="endTime" style={{width: 128}}>
             {form.getFieldDecorator('endTime', {
               rules: [
-                {validator: (_, value: moment.Moment, cb: any) => {
+                {validator: (_, value, cb: any) => {
                   cb(compareMoment(value)(form.getFieldValue('startTime')));
                 }}
               ],

@@ -33,7 +33,7 @@ export default class extends React.Component<IAppProps, IAppState> {
     handleSearch: (value: any) => void;
     handleSearchChange: (ev: any) => void;
     handleSelect: (params: ISelectFuncProps) => void;
-    handleScroll: (scrollTop: number, scrollLeft: number) => void;
+    handleScroll: () => void;
     handleSelectedDataDelete: (ev: React.MouseEvent<Element, MouseEvent>) => void;
     handlePopoverCancel: () => void;
     handlePopoverConfirm: (data: any) => void;

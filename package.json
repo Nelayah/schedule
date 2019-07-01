@@ -25,9 +25,9 @@
     "react-dom": ">=16.0.0"
   },
   "devDependencies": {
-    "@babel/core": "latest",
+    "@babel/core": "^7.4.5",
     "@babel/plugin-transform-runtime": "latest",
-    "@babel/preset-env": "latest",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "latest",
     "@babel/runtime": "latest",
     "@storybook/addon-actions": "^5.1.9",
@@ -43,7 +43,9 @@
     "@types/webpack-env": "latest",
     "antd": "^3.19.8",
     "autoprefixer": "^9.6.0",
+    "babel-jest": "^24.8.0",
     "babel-loader": "latest",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "clean-webpack-plugin": "latest",
     "css-loader": "^3.0.0",
     "cz-conventional-changelog": "latest",

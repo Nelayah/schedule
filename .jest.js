@@ -5,9 +5,10 @@ module.exports = {
   ],
   setupFilesAfterEnv: ['./node_modules/jest-enzyme/lib/index.js'],
   transform: {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.js$": "babel-jest",
+    "^.+\\.(ts|tsx)?$": "ts-jest"
   },
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?(x)$",
   transformIgnorePatterns: [
     "node_modules"
   ],
@@ -21,7 +22,7 @@ module.exports = {
   ],
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.test.json',
+      tsConfig: './tsconfig.test.json'
     }
   }
 };

@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import * as moment from 'moment';
+import moment from './moment-es6';
 
 const TimeProcessor = function(start, end) {
   this.__startTime = TimeProcessor.toMoment(start);

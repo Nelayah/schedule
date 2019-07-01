@@ -1,9 +1,8 @@
-
 import * as React from 'react';
 import {mount} from 'enzyme';
-import Demo from '../lib';
+import Scheduler from '../lib';
 
-describe('Demo', () => {
+describe('组件测试', () => {
   beforeAll(() => {
     jest.useFakeTimers();
     document.body.innerHTML = '<div id="mounter" />';
@@ -12,9 +11,9 @@ describe('Demo', () => {
   afterAll(() => {
     jest.useRealTimers();
   });
-  it('Demo exists', () => {
-    const wrapper = mount(<Demo />, { attachTo: document.getElementById('mounter') });
+  it('测试组件能正常挂载', () => {
+    const wrapper = mount(<Scheduler />, { attachTo: document.getElementById('mounter') });
     jest.runAllTimers();
     expect(wrapper.exists()).toBe(true);
   });
-})
+});
