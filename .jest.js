@@ -8,7 +8,7 @@ module.exports = {
     "^.+\\.js$": "babel-jest",
     "^.+\\.(ts|tsx)?$": "ts-jest"
   },
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?(x)$",
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|tsx)$",
   transformIgnorePatterns: [
     "node_modules"
   ],
