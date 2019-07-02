@@ -1,6 +1,6 @@
 {
   "name": "time-schedule",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "react schedule",
   "main": "lib/index.js",
   "scripts": {
