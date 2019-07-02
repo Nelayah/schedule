@@ -1,9 +1,9 @@
 import * as React from 'react';
 import connect from '../lib/connect';
 import {prefixCls} from '../index';
-import {SchedulerProps} from '../externals';
+import {ScheduleProps} from '../externals';
 
-export interface IAppProps extends SchedulerProps {
+export interface IAppProps extends ScheduleProps {
   data: any;
   unit: number;
   top: number;

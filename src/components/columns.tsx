@@ -12,9 +12,9 @@ import {
   prefixCls,
   cellColumnsCls
 } from '../index';
-import {SchedulerProps} from '../externals';
+import {ScheduleProps} from '../externals';
 
-export interface IAppProps extends SchedulerProps {
+export interface IAppProps extends ScheduleProps {
   rows: any[];
   cellCls: string;
   targetCol: any;

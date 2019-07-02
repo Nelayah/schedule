@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import Scheduler from '../lib';
+import Schedule from '../lib';
 
 describe('组件', () => {
   beforeAll(() => {
@@ -12,7 +12,7 @@ describe('组件', () => {
     jest.useRealTimers();
   });
   it('组件能正常挂载', () => {
-    const wrapper = mount(<Scheduler />, { attachTo: document.getElementById('mounter') });
+    const wrapper = mount(<Schedule />, { attachTo: document.getElementById('mounter') });
     jest.runAllTimers();
     expect(wrapper.exists()).toBe(true);
   });

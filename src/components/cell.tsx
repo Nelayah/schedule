@@ -2,9 +2,9 @@ import * as R from 'ramda';
 import * as React from 'react';
 import moment from '../lib/moment-es6';
 import connect from '../lib/connect';
-import {SchedulerProps} from '../externals';
+import {ScheduleProps} from '../externals';
 
-export interface IAppProps extends SchedulerProps {
+export interface IAppProps extends ScheduleProps {
   className?: string;
   index?: number;
   min?: number;

@@ -159,7 +159,7 @@ export default class extends React.Component<IAppProps, IAppState> {
             )}
           </FormItem>
         </Row>
-        <FormItem label="Scheduler Content">
+        <FormItem label="Schedule Content">
             {form.getFieldDecorator('content', {
               initialValue: initialValue.content
             })(

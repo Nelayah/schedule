@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { SchedulerProps } from '../externals';
-export interface IAppProps extends SchedulerProps {
+import { ScheduleProps } from '../externals';
+export interface IAppProps extends ScheduleProps {
     rows: any[];
     cellCls: string;
     targetCol: any;

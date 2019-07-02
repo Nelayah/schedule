@@ -1,7 +1,7 @@
 {
-  "name": "time-scheduler",
+  "name": "time-schedule",
   "version": "1.0.0",
-  "description": "react scheduler",
+  "description": "react schedule",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest --config .jest.js",
@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Nelayah/scheduler.git"
+    "url": "git@github.com:Nelayah/schedule.git"
   },
   "keywords": [
     "react",
-    "scheduler"
+    "schedule"
   ],
   "author": "hayalen",
   "license": "MIT",

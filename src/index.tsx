@@ -6,18 +6,18 @@ import classnames from 'classnames';
 import Columns, { IAppProps } from './components/columns';
 import Provider from './components/provider';
 import {
-  SchedulerProps,
-  SchedulerState
+  ScheduleProps,
+  ScheduleState
 } from './externals';
 
-export const prefixCls = 'time-scheduler';
+export const prefixCls = 'time-schedule';
 export const cellCls = `${prefixCls}-cell`;
 export const cellColumnsCls = `${prefixCls}-col`;
 export const cellHeaderCls = classnames(cellCls, `${prefixCls}-header-cell`);
 
-export default class extends React.Component<SchedulerProps, SchedulerState> {
-  static displayName = 'Time-scheduler';
-  static defaultProps: SchedulerProps = {
+export default class extends React.Component<ScheduleProps, ScheduleState> {
+  static displayName = 'Time-schedule';
+  static defaultProps: ScheduleProps = {
     startAt: '00:00',
     endAt: '23:50',
     timelineInterval: 30,
@@ -61,7 +61,7 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
       rows
     };
   }
-  componentWillReceiveProps(nextProps: SchedulerProps) {
+  componentWillReceiveProps(nextProps: ScheduleProps) {
     let rows = this.state.rows;
     // @ts-ignore
     const isDiff: any = R.complement(R.eqProps(R.__, nextProps, this.props));
@@ -86,7 +86,7 @@ export default class extends React.Component<SchedulerProps, SchedulerState> {
       this.maxHeight = Math.min(nextProps.maxHeight, this.height);
     }
   }
-  shouldComponentUpdate(nextProps: SchedulerProps, nextState: SchedulerState) {
+  shouldComponentUpdate(nextProps: ScheduleProps, nextState: ScheduleState) {
     // @ts-ignore
     const isDiffState: any = R.complement(R.eqProps(R.__, nextState, this.state));
     const isDiffPropsJSON: any = key => JSON.stringify(nextProps[key]) !== JSON.stringify(this.props[key]);

@@ -2,7 +2,7 @@ import * as R from 'ramda';
 import * as React from 'react';
 import moment from '../lib/moment-es6';
 import renderIf from 'render-if';
-import Scheduler from '../';
+import Schedule from '../';
 import PopoverForm from './PopoverForm';
 import '../style/index.css';
 import 'antd/lib/input/style/css';
@@ -29,7 +29,7 @@ export interface IAppState {
 export default class extends React.Component<IAppProps, IAppState> {
   static displayName = 'Demo';
   state = {
-    columns: [{key: 'family', title: 'Family Scheduler'}],
+    columns: [{key: 'family', title: 'Family Schedule'}],
     inputValue: undefined,
     dataSource: [],
     selectedIds: [],
@@ -126,7 +126,7 @@ export default class extends React.Component<IAppProps, IAppState> {
               <Icon type="delete" theme="filled" />
             </div>
           </div>
-          <div>{showNewContent('New Scheduler')}</div>
+          <div>{showNewContent('New Schedule')}</div>
           <div>{data.content}</div>
         </div>
       </PopoverForm>
@@ -144,7 +144,7 @@ export default class extends React.Component<IAppProps, IAppState> {
             onSearch={this.handleSearch}
           />
         </div>
-        <Scheduler
+        <Schedule
           timelineTitle="Time/Name"
           timelineWidth={120}
           startAt="08:00"

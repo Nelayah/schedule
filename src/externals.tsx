@@ -1,4 +1,4 @@
-export interface SchedulerProps {
+export interface ScheduleProps {
   className?: string;
   dataSource?: IDataSourceProps[];
   startAt?: string;
@@ -19,7 +19,7 @@ export interface SchedulerProps {
   selectedDataFaCC?: (selectedData: IDataSourceProps) => React.ReactNode;
 }
 
-export interface SchedulerState {
+export interface ScheduleState {
   isScrollLeft: boolean;
   isScrollTop: boolean;
   rows?: IColumnProps[];

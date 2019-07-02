@@ -1,13 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Scheduler from '../lib';
+import Schedule from '../lib';
 import '../lib/style/index.css';
 import Example from '../lib/example';
 
-storiesOf('Time Scheduler', module)
+storiesOf('Time Schedule', module)
   .add('Original Component', () => (
     <div style={{padding: 20}}>
-      <Scheduler
+      <Schedule
         timelineTitle="Time/Name"
         timelineWidth={120}
         startAt="08:00"
