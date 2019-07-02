@@ -91,9 +91,13 @@ export default class extends React.Component<ScheduleProps, ScheduleState> {
     const isDiffState: any = R.complement(R.eqProps(R.__, nextState, this.state));
     const isDiffPropsJSON: any = key => JSON.stringify(nextProps[key]) !== JSON.stringify(this.props[key]);
     const getColumnsKeyString = obj => JSON.stringify(R.pluck('key')(obj.columns));
+    const columnsKeyEquals = R.equals(getColumnsKeyString(nextProps), getColumnsKeyString(this.props));
+    // @ts-ignore
+    const getColumnsTitleSnap = R.compose(R.map(R.when(R.has('toJSON'), v => v.toJSON())), R.pluck('title'), R.prop('columns'));
+    const columnsTitleEquals = R.equals(getColumnsTitleSnap(nextProps), getColumnsTitleSnap(this.props));
     const shouldUpdateState = R.keys(this.state).reduce((prev, key) => prev || isDiffState(key), false);
 
-    return isDiffPropsJSON('dataSource') || getColumnsKeyString(nextProps) !== getColumnsKeyString(this.props) || shouldUpdateState;
+    return isDiffPropsJSON('dataSource') || !columnsKeyEquals || !columnsTitleEquals || shouldUpdateState;
   }
   // 数据行列滚动
   handleBodyScroll = () => {
