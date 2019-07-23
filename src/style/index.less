@@ -7,6 +7,8 @@
 @prefixClsCell: time-schedule-cell;
 
 .@{prefixCls} {
+  position: relative;
+  z-index: 100;
 	overflow: hidden;
 
 	user-select: none;
@@ -38,7 +40,7 @@
 	// 表格表头
 	&-header {
 		position: relative;
-		z-index: 20;
+		z-index: -80;
 
 		overflow: hidden;
 
@@ -102,20 +104,20 @@
     }
     &-background {
       position: absolute;
-      z-index: 8;
+      z-index: -92;
       top: 0;
       left: 0;
     }
     .@{prefixCls}-col-overlap {
       position: relative;
-      z-index: 9;
+      z-index: -91;
       .@{prefixClsCell} {
         border: 0;
       }
     }
     &-active {
       .@{prefixCls}-col-overlap {
-        z-index: 15;
+        z-index: -85;
       }
     }
     &-fixed {
@@ -151,7 +153,7 @@
   &-arrangement {
     line-height: 20px;
 
-    z-index: 10;
+    z-index: -90;
 
     overflow: hidden;
 
