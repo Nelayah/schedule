@@ -42,7 +42,7 @@ export default class extends React.Component<IAppProps, IAppState> {
       selectedIds,
       dataSource
     } = this.state;
-    return R.map(v => R.mergeDeepLeft({isSelected: selectedIds.includes(v['dataKey'])})(v))(dataSource);
+    return R.map((v: any) => R.mergeDeepLeft({isSelected: selectedIds.includes(v['dataKey'])})(v))(dataSource);
   }
   handleSelectedMouseDown = ev => {
     ev.stopPropagation();

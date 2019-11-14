@@ -1,4 +1,3 @@
-import * as R from 'ramda';
 import * as React from 'react';
 import '../style/index.css';
 import 'antd/lib/input/style/css';
@@ -26,9 +25,9 @@ export default class extends React.Component<IAppProps, IAppState> {
         scrollTop: number;
         scrollLeft: number;
     };
-    readonly dataSource: R.MergeDeep<{
-        isSelected: boolean;
-    }, {}>[];
+    readonly dataSource: {
+        [x: string]: any;
+    }[];
     handleSelectedMouseDown: (ev: any) => void;
     handleSearch: (value: any) => void;
     handleSearchChange: (ev: any) => void;
