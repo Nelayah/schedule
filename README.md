@@ -6,7 +6,7 @@ React 时间日程安排控件
 
 跟 `antd` 配合使用的DEMO
 
-![https://i.bmp.ovh/imgs/2019/07/def6f025493be745.gif](https://i.bmp.ovh/imgs/2019/07/def6f025493be745.gif)
+![](def6f025493be745.gif)
 
 ## 安装
 
